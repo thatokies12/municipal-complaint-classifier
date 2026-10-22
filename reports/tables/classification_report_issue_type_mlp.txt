@@ -1,0 +1,18 @@
+MLP (neural) - target: issue_type
+
+                 precision    recall  f1-score   support
+
+       drainage       1.00      1.00      1.00        27
+        garbage       0.97      1.00      0.99        36
+       graffiti       1.00      0.60      0.75         5
+illegal_parking       1.00      1.00      1.00        27
+          noise       1.00      1.00      1.00        29
+          other       0.75      0.75      0.75         4
+        pothole       1.00      1.00      1.00        30
+    streetlight       0.97      1.00      0.98        28
+  water_leakage       1.00      1.00      1.00        34
+
+       accuracy                           0.99       220
+      macro avg       0.97      0.93      0.94       220
+   weighted avg       0.99      0.99      0.99       220
+

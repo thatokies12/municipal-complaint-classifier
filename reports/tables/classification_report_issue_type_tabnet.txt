@@ -1,0 +1,18 @@
+Tabular Neural Network - target: issue_type
+
+                 precision    recall  f1-score   support
+
+       drainage       1.00      1.00      1.00        27
+        garbage       1.00      0.97      0.99        36
+       graffiti       0.83      1.00      0.91         5
+illegal_parking       1.00      1.00      1.00        27
+          noise       1.00      1.00      1.00        29
+          other       1.00      1.00      1.00         4
+        pothole       1.00      1.00      1.00        30
+    streetlight       1.00      1.00      1.00        28
+  water_leakage       1.00      1.00      1.00        34
+
+       accuracy                           1.00       220
+      macro avg       0.98      1.00      0.99       220
+   weighted avg       1.00      1.00      1.00       220
+

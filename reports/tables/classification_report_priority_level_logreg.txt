@@ -1,0 +1,13 @@
+Logistic Regression - target: priority_level
+
+              precision    recall  f1-score   support
+
+         low       0.66      0.76      0.70        41
+      medium       0.74      0.74      0.74        81
+        high       0.90      0.82      0.86        55
+    critical       0.90      0.88      0.89        43
+
+    accuracy                           0.79       220
+   macro avg       0.80      0.80      0.80       220
+weighted avg       0.80      0.79      0.79       220
+

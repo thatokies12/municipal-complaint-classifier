@@ -1,0 +1,23 @@
+# Virtual environment
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+
+# POPIA / privacy: do NOT commit the restricted raw dataset or any file that
+# may contain personal information. Obtain the dataset lawfully (see README).
+municipal_training_set_1100.csv
+*.raw.csv
+
+# Assignment brief contains student names/numbers (personal info) — keep private.
+IDA project group friday.pdf
+*.pdf
+
+# Trained artefacts can be large; regenerate with `python -m src.train` etc.
+# Uncomment the next line if your data licence forbids redistributing models.
+# models/

@@ -1,0 +1,2 @@
+champion,comparator,both_correct,champion_correct_comparator_wrong,champion_wrong_comparator_correct,both_wrong,n_discordant,method,statistic,p_value,significant_at_0.05
+tabnet,logreg,169,9,5,37,14,exact binomial,5.0,0.4239501953125,False

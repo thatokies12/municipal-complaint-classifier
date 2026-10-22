@@ -1,0 +1,40 @@
+{
+  "target": "issue_type",
+  "classes": [
+    "drainage",
+    "garbage",
+    "graffiti",
+    "illegal_parking",
+    "noise",
+    "other",
+    "pothole",
+    "streetlight",
+    "water_leakage"
+  ],
+  "champion_model": "rf",
+  "champion_label": "Random Forest",
+  "comparator_model": "tabnet",
+  "final_selection": "pre-optimisation (optimised did not improve)",
+  "best_params": {
+    "clf__n_estimators": 500,
+    "clf__min_samples_leaf": 2,
+    "clf__max_features": "log2",
+    "clf__max_depth": null
+  },
+  "pre_optimisation_test_macro_f1": 0.9786500212679816,
+  "post_optimisation_test_macro_f1": 0.9568708485789745,
+  "final_test_macro_f1": 0.9786500212679816,
+  "mcnemar": {
+    "both_correct": 216,
+    "champion_correct_comparator_wrong": 1,
+    "champion_wrong_comparator_correct": 3,
+    "both_wrong": 0,
+    "n_discordant": 4,
+    "method": "exact binomial",
+    "statistic": 1.0,
+    "p_value": 0.625,
+    "significant_at_0.05": false
+  },
+  "keras_backend": true,
+  "random_state": 42
+}

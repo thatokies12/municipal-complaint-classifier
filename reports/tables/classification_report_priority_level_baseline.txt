@@ -1,0 +1,13 @@
+Dummy baseline (most-frequent) - target: priority_level
+
+              precision    recall  f1-score   support
+
+         low       0.00      0.00      0.00        41
+      medium       0.37      1.00      0.54        81
+        high       0.00      0.00      0.00        55
+    critical       0.00      0.00      0.00        43
+
+    accuracy                           0.37       220
+   macro avg       0.09      0.25      0.13       220
+weighted avg       0.14      0.37      0.20       220
+

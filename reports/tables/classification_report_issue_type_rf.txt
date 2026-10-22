@@ -1,0 +1,18 @@
+Random Forest - target: issue_type
+
+                 precision    recall  f1-score   support
+
+       drainage       0.96      0.96      0.96        27
+        garbage       0.97      1.00      0.99        36
+       graffiti       1.00      1.00      1.00         5
+illegal_parking       1.00      1.00      1.00        27
+          noise       1.00      1.00      1.00        29
+          other       0.80      1.00      0.89         4
+        pothole       1.00      1.00      1.00        30
+    streetlight       1.00      1.00      1.00        28
+  water_leakage       1.00      0.94      0.97        34
+
+       accuracy                           0.99       220
+      macro avg       0.97      0.99      0.98       220
+   weighted avg       0.99      0.99      0.99       220
+

@@ -1,0 +1,18 @@
+Dummy baseline (most-frequent) - target: issue_type
+
+                 precision    recall  f1-score   support
+
+       drainage       0.00      0.00      0.00        27
+        garbage       0.16      1.00      0.28        36
+       graffiti       0.00      0.00      0.00         5
+illegal_parking       0.00      0.00      0.00        27
+          noise       0.00      0.00      0.00        29
+          other       0.00      0.00      0.00         4
+        pothole       0.00      0.00      0.00        30
+    streetlight       0.00      0.00      0.00        28
+  water_leakage       0.00      0.00      0.00        34
+
+       accuracy                           0.16       220
+      macro avg       0.02      0.11      0.03       220
+   weighted avg       0.03      0.16      0.05       220
+

@@ -1,0 +1,13 @@
+MLP (neural) - target: priority_level
+
+              precision    recall  f1-score   support
+
+         low       0.81      0.54      0.65        41
+      medium       0.68      0.91      0.78        81
+        high       0.98      0.80      0.88        55
+    critical       0.97      0.88      0.93        43
+
+    accuracy                           0.81       220
+   macro avg       0.86      0.78      0.81       220
+weighted avg       0.84      0.81      0.81       220
+

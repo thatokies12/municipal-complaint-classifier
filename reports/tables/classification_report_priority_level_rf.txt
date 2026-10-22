@@ -1,0 +1,13 @@
+Random Forest - target: priority_level
+
+              precision    recall  f1-score   support
+
+         low       0.66      0.56      0.61        41
+      medium       0.67      0.84      0.74        81
+        high       0.98      0.80      0.88        55
+    critical       1.00      0.88      0.94        43
+
+    accuracy                           0.79       220
+   macro avg       0.83      0.77      0.79       220
+weighted avg       0.81      0.79      0.79       220
+
