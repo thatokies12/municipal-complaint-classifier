@@ -295,12 +295,33 @@ def prepare(
     )
 
 
+AUDIT_CACHE_PATH = os.path.join(PROJECT_ROOT, "reports", "audit_summary.json")
+
+
 def audit_summary(data_path: str = DEFAULT_DATA_PATH) -> dict:
-    """Return a dictionary of audit facts used by the app Home / EDA pages."""
+    """Return a dictionary of aggregate audit facts for the app Home / EDA pages.
+
+    When the raw dataset is available, this computes the summary from it and
+    caches it (aggregate counts only, no personal data) to
+    ``reports/audit_summary.json``. When the raw dataset is absent — e.g. on a
+    public cloud deployment where the CSV is withheld for POPIA — it falls back
+    to the cached JSON so the interface still works.
+    """
+    if not os.path.exists(data_path):
+        if os.path.exists(AUDIT_CACHE_PATH):
+            import json
+            with open(AUDIT_CACHE_PATH) as fh:
+                return json.load(fh)
+        raise FileNotFoundError(
+            f"Raw dataset not found at '{data_path}' and no cached audit summary "
+            f"at '{AUDIT_CACHE_PATH}'. Run `python -m src.prepare` with the "
+            "dataset present to generate the cache."
+        )
+
     raw = load_raw(data_path)
     cleaned = clean(raw)
     dt = pd.to_datetime(raw["report_datetime"], errors="coerce", format="mixed")
-    return {
+    summary = {
         "n_rows_raw": int(raw.shape[0]),
         "n_cols_raw": int(raw.shape[1]),
         "n_rows_clean": int(cleaned.drop_duplicates(subset="report_id").shape[0]),
@@ -314,6 +335,18 @@ def audit_summary(data_path: str = DEFAULT_DATA_PATH) -> dict:
         "pii_columns": list(PII_COLUMNS),
         "feature_columns": list(ALL_FEATURE_COLUMNS),
     }
+
+    # Cache aggregate summary (no personal data) so the app can run without the
+    # raw dataset, e.g. on a public cloud deployment.
+    try:
+        import json
+        os.makedirs(os.path.dirname(AUDIT_CACHE_PATH), exist_ok=True)
+        with open(AUDIT_CACHE_PATH, "w") as fh:
+            json.dump(summary, fh, indent=2)
+    except OSError:
+        pass
+
+    return summary
 
 
 if __name__ == "__main__":

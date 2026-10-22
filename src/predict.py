@@ -117,11 +117,24 @@ def meta_path(target: str) -> str:
 
 
 def load_pipeline(target: str):
-    """Load the saved final pipeline for a target, or None if missing."""
+    """Load the saved final pipeline for a target.
+
+    Returns None if the file is missing or cannot be unpickled (e.g. the Keras
+    model's TensorFlow backend is unavailable or mismatched in the runtime).
+    This lets the interface degrade gracefully instead of crashing.
+    """
     path = model_path(target)
     if not os.path.exists(path):
         return None
-    return joblib.load(path)
+    try:
+        return joblib.load(path)
+    except Exception:  # noqa: BLE001 - missing/incompatible backend, bad pickle
+        return None
+
+
+def can_load(target: str) -> bool:
+    """True if the saved final pipeline for a target loads successfully."""
+    return load_pipeline(target) is not None
 
 
 def load_meta(target: str) -> Optional[dict]:
@@ -145,6 +158,5 @@ def predict(pipe, X: pd.DataFrame) -> Dict:
 
 
 def available_targets() -> List[str]:
-    """Return targets that have a saved final pipeline."""
-    return [t for t in (TARGET_SERVICE, TARGET_URGENCY)
-            if os.path.exists(model_path(t))]
+    """Return targets whose saved final pipeline loads successfully."""
+    return [t for t in (TARGET_SERVICE, TARGET_URGENCY) if can_load(t)]
