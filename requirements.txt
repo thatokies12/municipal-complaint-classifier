@@ -1,22 +1,21 @@
 # Civic & Municipality Complaint Classification System
-# Python 3.9+ (developed and tested on Python 3.9.6)
+# Target runtime: Python 3.12 (set in Streamlit Cloud -> Advanced settings).
+# Version ranges are chosen so prebuilt wheels exist (no source builds),
+# which keeps the public deployment fast and reliable.
 #
 # Core data + ML
-pandas>=2.0,<3.0
-numpy>=1.24,<2.1
-scikit-learn>=1.3,<1.7
-scipy>=1.10,<1.14
-matplotlib>=3.7,<3.10
+pandas>=2.2,<2.4
+numpy>=1.26,<2.1
+scikit-learn>=1.4,<1.7
+scipy>=1.11,<1.15
+matplotlib>=3.8,<3.10
 joblib>=1.3
 
 # Web interface
-streamlit>=1.30,<2.0
+streamlit>=1.37,<2.0
 
-# Second neural network (Keras feed-forward tabular net).
-# Required to LOAD the saved urgency final_pipeline (a Keras model) on a server
-# such as Streamlit Community Cloud. On Linux cloud runtimes this installs the
-# standard TensorFlow wheel. Locally on Apple Silicon use the same `tensorflow`.
-# If TensorFlow cannot be installed, the app still runs the service-category
-# model and shows a clear notice for the urgency model.
-tensorflow-cpu>=2.16,<2.17 ; sys_platform == "linux"
-tensorflow>=2.16,<2.17 ; sys_platform == "darwin"
+# NOTE: TensorFlow is intentionally NOT required for the hosted app.
+# The interface loads TensorFlow-free deployment pipelines
+# (models/<target>/deploy_pipeline.joblib) built by `python -m src.build_deploy_models`.
+# To reproduce the full academic pipeline locally (including the Keras tabular
+# neural network), additionally install:  pip install "tensorflow>=2.16,<2.18"

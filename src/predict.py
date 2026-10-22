@@ -112,24 +112,30 @@ def model_path(target: str) -> str:
     return os.path.join(MODELS_ROOT, target, "final_pipeline.joblib")
 
 
+def deploy_path(target: str) -> str:
+    """A TensorFlow-free pipeline used for lightweight public deployment."""
+    return os.path.join(MODELS_ROOT, target, "deploy_pipeline.joblib")
+
+
 def meta_path(target: str) -> str:
     return os.path.join(MODELS_ROOT, target, "final_pipeline_meta.json")
 
 
 def load_pipeline(target: str):
-    """Load the saved final pipeline for a target.
+    """Load the saved pipeline for a target.
 
-    Returns None if the file is missing or cannot be unpickled (e.g. the Keras
-    model's TensorFlow backend is unavailable or mismatched in the runtime).
-    This lets the interface degrade gracefully instead of crashing.
+    Prefers the TensorFlow-free ``deploy_pipeline.joblib`` when present (fast,
+    no heavy backend — ideal for cloud hosting), otherwise the full
+    ``final_pipeline.joblib``. Returns None if nothing loads (e.g. a missing or
+    mismatched backend), so the interface degrades gracefully.
     """
-    path = model_path(target)
-    if not os.path.exists(path):
-        return None
-    try:
-        return joblib.load(path)
-    except Exception:  # noqa: BLE001 - missing/incompatible backend, bad pickle
-        return None
+    for path in (deploy_path(target), model_path(target)):
+        if os.path.exists(path):
+            try:
+                return joblib.load(path)
+            except Exception:  # noqa: BLE001 - incompatible backend / bad pickle
+                continue
+    return None
 
 
 def can_load(target: str) -> bool:
